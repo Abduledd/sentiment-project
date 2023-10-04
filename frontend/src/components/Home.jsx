@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 const PhraseInputForm = () => {
   const [phrase, setPhrase] = useState("");
+  const [sentiment, setSentiment] = useState("");
 
   const handleInputChange = (event) => {
     setPhrase(event.target.value);
@@ -18,7 +19,7 @@ const PhraseInputForm = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        // Handle the response from the server
+        setSentiment(data.sentiment);
         console.log("Server response:", data);
       })
       .catch((error) => {
@@ -52,6 +53,9 @@ const PhraseInputForm = () => {
           className="font-mono mt-4 px-3 py-1 rounded-lg text-blue-400 bg-black hover:bg-slate-900 duration-150 hover:scale-105 w-fit">
           Submit
         </button>
+        <div className="text-white pt-3 ">
+          The phrase inputed is {sentiment}
+        </div>
       </form>
     </div>
   );
